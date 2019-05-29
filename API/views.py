@@ -2,10 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 import json
+from django.middleware import csrf
 
 from .models import *
 from .forms import *
 
+def getScrf(request):
+    return JsonResponse({'scrf_token': csrf.get_token(request)})
 
 def readPosts(request):
     posts = list(Post.objects.values())
