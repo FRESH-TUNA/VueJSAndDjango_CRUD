@@ -16,7 +16,7 @@ new Vue({
     render: h => h(contentApp),
 }).$mount('#contentApp')
 
-var footerApp = new Vue({
+new Vue({
     render: h => h(footerApp),
 }).$mount('#footerApp')
 
