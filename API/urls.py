@@ -4,9 +4,9 @@ from . import views
 
 urlpatterns = [
     path('', views.readPosts, name="readPosts"),
-    path('getScrf', views.getScrf, name="getScrf"),
+    path('getCsrf', views.getCsrf, name="getCsrf"),
     path('<int:pk>', views.readPost, name="readPost"),
     path('create', views.createPost, name="createPost"),
-    path('<int:pk>/update', views.createPost, name="createPost"),
+    path('<int:pk>/update', views.updatePost, name="updatePost"),
     path('<int:pk>/delete', views.deletePost, name="deletePost"),
 ]

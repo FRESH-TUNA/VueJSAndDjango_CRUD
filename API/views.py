@@ -7,8 +7,8 @@ from django.middleware import csrf
 from .models import *
 from .forms import *
 
-def getScrf(request):
-    return JsonResponse({'scrf_token': csrf.get_token(request)})
+def getCsrf(request):
+    return JsonResponse({'csrfToken': csrf.get_token(request)})
 
 def readPosts(request):
     posts = list(Post.objects.values())
