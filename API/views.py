@@ -22,7 +22,11 @@ def createPost(request):
     if request.method == 'POST':
         body = json.loads(request.body.decode('utf-8'))
         postForm = PostForm(body)
-        postForm.save()
+
+        post = postForm.save(commit=False)
+        post.user = request.user  
+        post.save()
+
         return JsonResponse({'result': 'success'})
 
 def updatePost(request, pk):
