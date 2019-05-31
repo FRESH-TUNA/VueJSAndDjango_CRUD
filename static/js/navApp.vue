@@ -7,7 +7,7 @@
             <button type="button" class="btn btn-primary" @click="showSignupModal">Sign up</button>
         
             <component
-                v-bind:is="modalComponentState"
+                :is="modalComponentState"
                 @on-click-outside="modalComponentState = false"
                 
                 @after-create-account="modalComponentState = false"
@@ -36,7 +36,8 @@ module.exports = {
     },
     methods: {
         showCreatePostComponent() {
-            this.$eventBus.$emit('show-create-post-component')
+            if(this.loginState === true)
+                this.$eventBus.$emit('show-create-post-component')
         },
         showReadPostsComponent() {
             this.$eventBus.$emit('show-read-posts-component')

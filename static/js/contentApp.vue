@@ -40,7 +40,7 @@ module.exports = {
         showUpdatePostComponent: function(id) {
             this.postPk = id;
             this.currentComponent = 'update-post-component'
-        },
+        }
     },
     created() {
         axios.get('http://127.0.0.1:8000/api/getCsrf')
