@@ -9,8 +9,8 @@ def signup(request):
         body = json.loads(request.body.decode('utf-8'))
         if body['password1'] == body['password2']:
             User.objects.create_user(
-                username=request.POST['username'],
-                password=request.POST['password1']
+                username=body['username'],
+                password=body['password1']
             )
             return JsonResponse({'result': 'success'})
 
@@ -20,7 +20,7 @@ def signin(request):
         user = auth.authenticate(
             request,
             username=body['username'],
-            password=body['password1']
+            password=body['password']
         )
 
         if user is not None:
@@ -30,6 +30,5 @@ def signin(request):
             return JsonResponse({'result': 'failed'})
 
 def signout(request):
-    if request.method == 'POST':
-        auth.logout(request)
-        return JsonResponse({'result': 'success'})
+    auth.logout(request)
+    return JsonResponse({'result': 'success'})
