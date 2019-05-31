@@ -10,6 +10,13 @@ from .forms import *
 def getCsrf(request):
     return JsonResponse({'csrfToken': csrf.get_token(request)})
 
+def checkAuthToPost(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if post.user == request.user:
+        return JsonResponse({'result': 'success'})
+    else:
+        return JsonResponse({'result': 'failure'})
+
 def readPosts(request):
     posts = list(Post.objects.values())
     return JsonResponse({'posts': posts})

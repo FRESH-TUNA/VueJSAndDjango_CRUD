@@ -67,6 +67,15 @@ module.exports = {
                     this.setLoginState()
                 })
         }
+    },
+    created() {
+        axios.get('http://127.0.0.1:8000/AuthAPI/loginState')
+            .then(response => {
+                if(response.data.result !== 'false') {
+                    this.username = response.data.result
+                    this.setLoginState()
+                }
+            })
     }
 }
 </script>

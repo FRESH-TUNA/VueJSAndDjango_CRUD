@@ -4,6 +4,12 @@ from django.contrib import auth
 from django.http import JsonResponse
 import json
 
+def loginState(request):
+    if request.user.is_authenticated:
+        return JsonResponse({'result': request.user.username})
+    else:
+        return JsonResponse({'result': 'false'})
+
 def signup(request):
     if request.method == 'POST':
         body = json.loads(request.body.decode('utf-8'))

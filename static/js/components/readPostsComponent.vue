@@ -23,25 +23,27 @@ module.exports = {
     },
     methods: {
         onClickUpdate (id) {
-            axios.get('http://127.0.0.1:8000/AuthAPI/' + id + '/checkAuthToPost')
+            axios.get('http://127.0.0.1:8000/api/' + id + '/checkAuthToPost')
                 .then(response => {
-                    if (response.data.result === 'true') {
+                    if (response.data.result === 'success') {
                         this.$emit('on-click-update', id)
                     }
                 }
             );
         },
         checkAuthToPost(id) {
-            axios.get('http://127.0.0.1:8000/AuthAPI/' + id + '/checkAuthToPost')
-                .then(response => {
-                    if (response.data.result === 'true') {
-                        return true;
+            return new Promise(function (resolve, reject) {
+                axios.get('http://127.0.0.1:8000/api/' + id + '/checkAuthToPost')
+                    .then(response => {
+                        if (response.data.result === 'success') {
+                            resolve(true);
+                        }
                     }
-                }
-            );
+                );
+            });
         },
         deletePost(id) {
-            checkAuthToPost(id).then(result => {
+            this.checkAuthToPost(id).then(result => {
                 if(result === true) {
                     axios.post('http://127.0.0.1:8000/api/' + id + '/delete',
                         {
